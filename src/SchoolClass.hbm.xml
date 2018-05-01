@@ -10,17 +10,16 @@
 			<key column="class_id" />
 			<one-to-many class="Student" />
 		</set>
-		
-		
 	<property name="profile" column="profile" type="string"></property>
 	<property name="currentYear" column="currentYear" type="integer"></property>
 	<property name="startYear" column="startYear" type="integer"></property>
 	
-	<set name="teachers" table="teacher_class"
-			inverse="true" lazy="true" fetch="select">
-			<key column="teacher_id" />
-			<many-to-many column="schoolClass_id" class="SchoolClass" />
+	<set name="teachers" table="teacher_class"  cascade="save-update">
+			<key column="schoolClass_id" />
+			<many-to-many column="teacher_id" class="Teacher" />
 		</set>
+		
+
 	
 </class>
 </hibernate-mapping>

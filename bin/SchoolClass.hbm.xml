@@ -14,6 +14,12 @@
 	<property name="currentYear" column="currentYear" type="integer"></property>
 	<property name="startYear" column="startYear" type="integer"></property>
 	
+	<set name="teachers" table="teacher_class"  cascade="save-update">
+			<key column="schoolClass_id" />
+			<many-to-many column="teacher_id" class="Teacher" />
+		</set>
+		
+
 	
 </class>
 </hibernate-mapping>

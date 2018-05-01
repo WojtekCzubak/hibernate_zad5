@@ -20,7 +20,7 @@ public class Main {
 	public static void main(String[] args) {
 		Main main = new Main();
 		//main.addNewData();
-		//main.printSchools();
+		main.printSchools();
 
 		//main.executeQueries();
 		//main.updatingObject();
@@ -111,21 +111,28 @@ public class Main {
 	
 	private void addNewData() {
 		School newSchool = new School();
-		newSchool.setName("AWF");
-		newSchool.setAddress("ul. Nowa 15, Krakow");
+		newSchool.setName("Akademia Rolnicza");
+		newSchool.setAddress("ul. Pilsudskiego 15, Krakow");
 		
 		SchoolClass newClass = new SchoolClass();
-		newClass.setProfile("A1");
+		newClass.setProfile("Przyrodnicza");
 		newClass.setStartYear(2015);
 		newClass.setCurrentYear(1);
 		
 		Student newStudent = new Student();
-		newStudent.setName("Liliana");
+		newStudent.setName("Joanna");
 		newStudent.setSurname("Nowak");
 		newStudent.setPesel("98765432");
 		
-		Teacher t1 = new Teacher("Anna","Koniecpolska", 33333333333);
-		Teacher t1 = new Teacher("Maria","Roman", 11111111111);
+		Teacher t1 = new Teacher();
+		t1.setName("Adam");
+		t1.setSurname("Lubicz");
+		t1.setPesel("1234567");
+		
+		Teacher t2 = new Teacher();
+		t2.setName("Kacper");
+		t2.setSurname("Poznanski");
+		t2.setPesel("77777777");
 	
 		
 		newClass.addStudent(newStudent);
@@ -135,21 +142,10 @@ public class Main {
 		
 		Transaction transaction = session.beginTransaction();
 		session.save(newSchool);
+		session.save(newClass);
 		transaction.commit();
 	}
 	
-		/*private void addNewTeachers() { 
-        
-        Teacher t1 = new Teacher ("Ewelina", "Janiszewska", 843272889);
-        
-        t1.getSchoolClass().add()
-              
-        employee1.getMeetings().add(meeting1);
-        employee1.getMeetings().add(meeting2);
-        employee2.getMeetings().add(meeting1);
-        
-        session.save(t1);
-        session.save(employee2); */
 
 	private void printSchools() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -159,13 +155,20 @@ public class Main {
 		System.out.println("### Schools and classes");
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy");
 		for (School s : schools) {
-			System.out.println(s);
+			System.out.println("\n"+s);
 			for (SchoolClass schoolClass : s.getClasses()) {
 				System.out.println("   " + schoolClass);
 				for (Student student : schoolClass.getStudents()) {
+					System.out.print("Student:");
 					System.out.print("            " + student.getName());
 					System.out.print(" " + student.getSurname());
 					System.out.println(" (" + student.getPesel() + ")");
+				}
+			
+				for (Teacher teacher : schoolClass.getTeachers()){
+					System.out.print("\n"+"Teacher:");
+					System.out.print("       " + teacher.getName());
+					System.out.print("       " + teacher.getSurname());
 				}
 			}
 		}

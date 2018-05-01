@@ -8,7 +8,7 @@ public class Teacher {
 		private String surname;
 		private String pesel;
 		
-		private Set<SchoolClass> schoolClasses = new HashSet<SchoolClass>();
+		private Set<SchoolClass> classes = new HashSet<SchoolClass>();
 		
 		public long getId() {
 			return id;
@@ -23,16 +23,16 @@ public class Teacher {
 		}
 		
 		//SchoolClass methods
-		public Set<SchoolClass> getSchoolClass() {
-			return schoolClasses;
+		public Set<SchoolClass> getClasses() {
+			return classes;
 		}
 
-		public void setSchoolClass(Set<SchoolClass> schoolClasses) {
-			this.schoolClasses = schoolClasses;
+		public void setClasses(Set<SchoolClass> NewschoolClasses) {
+			classes = NewschoolClasses;
 		}
 		
-		public void addSchoolClass(SchoolClass newSchoolClass) {
-			schoolClasses.add(newSchoolClass);
+		public void addClass(SchoolClass newSchoolClass) {
+			classes.add(newSchoolClass);
 		}
 
 		public String getName() {
